@@ -58,6 +58,16 @@ npm run typecheck
 
 ---
 
+## Phase Development Workflow
+
+When working on a development phase from the project plan, use an orchestrator/worker agent split:
+
+- The **main (orchestrator) agent runs on Opus 4.8**. It owns the phase: decomposing it into scoped coding tasks, delegating them to subagents, reviewing and integrating their output, running typecheck/lint/tests, and verifying the phase against this guide. The orchestrator does **not** write feature code directly.
+- **Coding is delegated to subagents running Sonnet 4.6.** Each subagent implements one scoped task and returns its changes.
+- The main agent integrates subagent work, resolves conflicts, and confirms the phase's verification steps pass before marking it complete.
+
+---
+
 ## Architecture Principles
 
 - **Separation of concerns**: client, server, and shared directories are distinct. Never import server-only code in the client.
