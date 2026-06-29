@@ -12,8 +12,7 @@ export function TopNav({ title, actions }: TopNavProps) {
   return (
     <header className="flex h-14 items-center gap-4 border-b border-border-subtle bg-surface-primary px-6">
       <div className="flex items-center gap-3">
-        <div className="h-7 w-7 rounded-md bg-accent" />
-        <span className="text-sm font-bold text-fg-primary">WarrantyField</span>
+        <span className="text-sm font-bold text-fg-primary">Warranty Startups</span>
       </div>
 
       {title && (

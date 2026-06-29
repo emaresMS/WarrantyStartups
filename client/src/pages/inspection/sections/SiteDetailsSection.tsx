@@ -33,6 +33,30 @@ export function SiteDetailsSection() {
         <TextField label="Drive Model #" placeholder="e.g. ATV630D11N4" error={e.driveModelNumber?.message} required {...register('siteDetails.driveModelNumber')} />
         <TextField label="Serial Number" placeholder="Drive serial number" error={e.serialNumber?.message} required {...register('siteDetails.serialNumber')} />
         <TextField label="Firmware Version" placeholder="e.g. V3.1 IE56" {...register('siteDetails.firmwareVersion')} />
+        <SelectField
+          label="Manual Operation"
+          options={[{ value: 'Normal', label: 'Normal' }, { value: 'Not Ready', label: 'Not Ready' }]}
+          placeholder="Select status..."
+          error={e.manualOperation?.message}
+          required
+          {...register('siteDetails.manualOperation')}
+        />
+        <SelectField
+          label="Remote Operation"
+          options={[{ value: 'Normal', label: 'Normal' }, { value: 'Not Ready', label: 'Not Ready' }]}
+          placeholder="Select status..."
+          error={e.remoteOperation?.message}
+          required
+          {...register('siteDetails.remoteOperation')}
+        />
+        <SelectField
+          label="COM Operation"
+          options={[{ value: 'No COM', label: 'No COM' }, { value: 'Normal', label: 'Normal' }, { value: 'Not Ready', label: 'Not Ready' }]}
+          placeholder="Select status..."
+          error={e.COMOperation?.message}
+          required
+          {...register('siteDetails.COMOperation')}
+        />
       </div>
 
       <div className="grid grid-cols-1 gap-5">

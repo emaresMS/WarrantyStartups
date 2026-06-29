@@ -13,7 +13,10 @@ export const siteDetailsSchema = z.object({
   customerAddress: z.string().min(1, 'Required'),
   siteContactName: z.string().optional(),
   siteContactNumber: z.string().optional(),
-  type: z.enum(['systems', 'standalone', 'other']),
+  type: z.enum(['Compact', 'MCC', 'MCE', 'Systems', 'Wall Mount']),
+  manualOperation: z.enum(['Normal', 'Not Ready']),
+  remoteOperation: z.enum(['Normal', 'Not Ready']),
+  COMOperation: z.enum(['No COM', 'Normal', 'Not Ready']),
 })
 
 export const equipmentNameplateSchema = z.object({
@@ -31,37 +34,41 @@ export const electricalReadingsSchema = z.object({
   inputVoltageL1L2: z.coerce.number(),
   inputVoltageL1L3: z.coerce.number(),
   inputVoltageL2L3: z.coerce.number(),
+  inputVoltageL1Ground: z.coerce.number().optional(),
+  inputVoltageL2Ground: z.coerce.number().optional(),
+  inputVoltageL3Ground: z.coerce.number().optional(),
   motorOhmL1Ground: z.coerce.number().optional(),
   motorOhmL2Ground: z.coerce.number().optional(),
   motorOhmL3Ground: z.coerce.number().optional(),
   motorOhmL1L2: z.coerce.number().optional(),
   motorOhmL1L3: z.coerce.number().optional(),
-  motorOhmL2L3: z.coerce.number().optional(),
-  outputCurrentT1: z.coerce.number().optional(),
-  outputCurrentT2: z.coerce.number().optional(),
-  outputCurrentT3: z.coerce.number().optional(),
-  outputVoltageT1T2: z.coerce.number().optional(),
-  outputVoltageT1T3: z.coerce.number().optional(),
-  outputVoltageT2T3: z.coerce.number().optional(),
+  motorOhmL2L3: z.coerce.number().optional()
 })
 
-const enclosureCondition = z.enum(['normal', 'damaged', 'corroded'])
-const torqueStatus = z.enum(['validated', 'not_validated'])
+const enclosureCondition = z.enum(['Normal', 'Dents', 'Scratches', 'Scratches and Dents'])
+const torqueStatus = z.enum(['Found Loose - Damaged', 'Found Loose - Torqued', 'Torque Validated'])
 
 export const safetyCheckSchema = z.object({
   exteriorEnclosureCondition: enclosureCondition,
   interiorEnclosureCondition: enclosureCondition,
+  breakerMNFuseType: z.string().min(1, 'Required'),
   vfdL1L2L3Torque: torqueStatus,
   vfdT1T2T3Torque: torqueStatus,
   highVoltageConnections: torqueStatus,
-  controlWireConnections: z.enum(['verified_torqued', 'not_verified']),
-  groundConnections: z.enum(['properly_grounded', 'not_grounded']),
-  contactorConnections: torqueStatus,
+  controlWireConnections: z.enum(['Verified - Torqued', 'Found Loose - Torqued', 'Wiring Error - Resolved']),
+  groundConnections: z.enum(['Properly Grounded', 'Not Properly Grounded']),
+  inputReferenceMethod: z.enum(['0-10V (Al1)', '0-10V (Al2)', '0-10V (Al3)', '4-20mA (Al1)', '4-20mA (Al2)', '4-20mA (Al3)', 'COM']),
+  outputReferenceMethod: z.enum(['0-10V (AQ1)', '0-10V (AQ2)', '0-10V (AQ3)', '4-20mA (AQ1)', '4-20mA (AQ2)', '4-20mA (AQ3)', 'COM']),
+  COMProtocolAndAddress: z.enum(['CANopen', 'DeviceNet', 'EtherCAT', 'EtherNet/IP', 'Modbus TCP', 'Not Applicable', 'PROFINET']),
+  contactorConnections: z.enum(['Found Loose - Damaged', 'Found Loose - Torqued', 'No Contactors', 'Torque Validated']),
   lineReactorConnections: torqueStatus,
-  statusIndicatorLights: z.enum(['normal', 'fault', 'off']),
-  location: z.enum(['interior_ac', 'interior_no_ac', 'exterior']),
-  balancedOutputCurrent: z.enum(['balanced', 'unbalanced']),
-  balancedOutputVoltage: z.enum(['balanced', 'unbalanced']),
+  statusIndicatorLights: z.enum(['AUTO LED Defective', 'FAULT LED Defective', 'LED Lights Normal', 'POWER LED Defective', 'RUN LED Defective']),
+  location: z.enum(['Exterior - Covered', 'Exterior - Direct Sun Exposure', 'Exterior - Enclosed A/C', 'Exterior - No A/C', 'Interior - A/C', 'Interior - No A/C']),
+  balancedOutputCurrent: z.enum(['Balanced', 'Suspect Motor', 'VFD Output Issue']),
+  balancedOutputVoltage: z.enum(['Balanced', 'Not Balanced']),
+  powerSupplyVoltages: z.enum(['Normal Via SoMove Test', 'Defective Via SoMove Test']),
+  DCBusVoltage: z.enum(['Defective (In x 1.414)', 'Normal (In x 1.414)']),
+  RFIFilterStatus: z.enum(['RFI Filter Enabled', 'RFI Filter Disabled'])
 })
 
 export const loadTestingSchema = z.object({

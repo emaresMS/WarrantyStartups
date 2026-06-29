@@ -19,15 +19,6 @@ export function ElectricalReadingsSection() {
       <section className="space-y-4">
         <h3 className="text-base font-semibold text-fg-primary">Input Voltage Values</h3>
         <div className="grid grid-cols-3 gap-4">
-          <NumberField label="L1-L2" placeholder="0.0" unit="V" error={e.inputVoltageL1L2?.message} required {...register('electricalReadings.inputVoltageL1L2')} />
-          <NumberField label="L1-L3" placeholder="0.0" unit="V" error={e.inputVoltageL1L3?.message} required {...register('electricalReadings.inputVoltageL1L3')} />
-          <NumberField label="L2-L3" placeholder="0.0" unit="V" error={e.inputVoltageL2L3?.message} required {...register('electricalReadings.inputVoltageL2L3')} />
-        </div>
-      </section>
-
-      <section className="space-y-4">
-        <h3 className="text-base font-semibold text-fg-primary">Motor Ohm Values</h3>
-        <div className="grid grid-cols-3 gap-4">
           {([
             ['L1 - Ground', 'motorOhmL1Ground'],
             ['L2 - Ground', 'motorOhmL2Ground'],
@@ -42,20 +33,18 @@ export function ElectricalReadingsSection() {
       </section>
 
       <section className="space-y-4">
-        <h3 className="text-base font-semibold text-fg-primary">Output Voltage</h3>
+        <h3 className="text-base font-semibold text-fg-primary">Motor Ohm Values</h3>
         <div className="grid grid-cols-3 gap-4">
-          <NumberField label="T1-T2" placeholder="0.0" unit="V" {...register('electricalReadings.outputVoltageT1T2')} />
-          <NumberField label="T1-T3" placeholder="0.0" unit="V" {...register('electricalReadings.outputVoltageT1T3')} />
-          <NumberField label="T2-T3" placeholder="0.0" unit="V" {...register('electricalReadings.outputVoltageT2T3')} />
-        </div>
-      </section>
-
-      <section className="space-y-4">
-        <h3 className="text-base font-semibold text-fg-primary">Output Current</h3>
-        <div className="grid grid-cols-3 gap-4">
-          <NumberField label="T1" placeholder="0.0" unit="A" {...register('electricalReadings.outputCurrentT1')} />
-          <NumberField label="T2" placeholder="0.0" unit="A" {...register('electricalReadings.outputCurrentT2')} />
-          <NumberField label="T3" placeholder="0.0" unit="A" {...register('electricalReadings.outputCurrentT3')} />
+          {([
+            ['L1 - Ground', 'inputVoltageL1Ground'],
+            ['L2 - Ground', 'inputVoltageL2Ground'],
+            ['L3 - Ground', 'inputVoltageL3Ground'],
+            ['L1-L2',       'inputVoltageL1L2'    ],
+            ['L1-L3',       'inputVoltageL1L3'    ],
+            ['L2-L3',       'inputVoltageL2L3'    ],
+          ] as const).map(([label, field]) => (
+            <NumberField key={field} label={label} placeholder="0.0" unit="Ω" {...register(`electricalReadings.${field}`)} />
+          ))}
         </div>
       </section>
     </div>

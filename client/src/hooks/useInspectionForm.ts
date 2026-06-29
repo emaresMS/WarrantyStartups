@@ -6,10 +6,10 @@ import { useAutoSave } from './useAutoSave'
 import { db } from '@/lib/db'
 
 export const FORM_SECTIONS = [
-  { id: 'siteDetails',          label: 'Site Details',           fieldCount: 12 },
+  { id: 'siteDetails',          label: 'Site Details',           fieldCount: 15 },
   { id: 'equipmentNameplate',   label: 'Equipment Nameplate',    fieldCount: 6  },
-  { id: 'electricalReadings',   label: 'Electrical Readings',    fieldCount: 15 },
-  { id: 'safetyCheck',          label: 'Safety Check',           fieldCount: 13 },
+  { id: 'electricalReadings',   label: 'Electrical Readings',    fieldCount: 12 },
+  { id: 'safetyCheck',          label: 'Safety Check',           fieldCount: 20 },
   { id: 'loadTesting',          label: 'Load Testing',           fieldCount: 24 },
   { id: 'signOff',              label: 'Sign-off',               fieldCount: 3  },
 ] as const
